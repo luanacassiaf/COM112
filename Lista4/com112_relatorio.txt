@@ -1,0 +1,17 @@
+Número de Elementos Ordenados: 10000
+
+Método Buble Sort
+	Tempo de execução: 36,85 s
+	Número de comparações: 24908772 
+	Número de movimentações: 24918771 
+
+Método Selection Sort
+	Tempo de execução: 37,09 s
+	Número de comparações: 24908772 
+	Número de movimentações: 24918771 
+
+Método Insertion Sort
+	Tempo de execução: 37,08 s
+	Número de comparações: 24908772 
+	Número de movimentações: 24918771 
+
