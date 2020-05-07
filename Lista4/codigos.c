@@ -1,10 +1,17 @@
 #include <stdio.h>
-#include<time.h>
+#include <time.h>
+#include <locale.h>
 #define TAM 10000
 
+clock_t start, end;
+int cmp, mov, ordem;
+
 void bubleSort(int v[]) {
+	start = clock();
+	
 	int i, j, aux;
-	int cmp = 0, mov = 0;
+	cmp = 0;
+	mov = 0;
 	
 	for(i=0; i < TAM; i++) {
 		for(j = 0; j < (TAM - 1) ; j++) {
@@ -20,15 +27,17 @@ void bubleSort(int v[]) {
 			}
 		}
 	}
-	
-    relatorio(cmp, mov);
+	end = clock();
 	
 	return;
 }
 
 void selectionSort(int v[]) {
+	start = clock();
+	
 	int i, j, max, aux;
-	int cmp = 0, mov = 0;
+	cmp = 0;
+	mov = 0;
 	
 	for (i = 0; i < (TAM - 1); i++) {
 	    max = i;
@@ -47,15 +56,17 @@ void selectionSort(int v[]) {
 	      mov++;
 	    }
  	}
- 	
-    relatorio(cmp, mov);
- 	
+   	end = clock();
+
  	return;
 }
 
 void insertionSort(int v[]) { 
+	start = clock();
+
     int i, j, aux;
-    int cmp = 0, mov = 0;
+    cmp = 0;
+	mov = 0;
 	
     for (i = 1; i < TAM; i++) { 
        	aux = v[i];
@@ -69,16 +80,16 @@ void insertionSort(int v[]) {
         } 
         v[j+1] = aux;
     } 
-    
-    relatorio(cmp, mov);
-    
+    end = clock();
+
     return;
 }
 
 void menu(int v[]){
-	printf("\nDigite o metodo de ordenacao: \n");
-	printf("1 - Buble Sort\n2 - Selection Sort\n3 - Insertion Sort\n");
-	int ordem;
+	printf("\nDigite o método de ordenação: \n");
+	printf("\t1 - Buble Sort\n");
+	printf("\t2 - Selection Sort\n");
+	printf("\t3 - Insertion Sort\n");
 	scanf("%d", &ordem);
 	
 	switch(ordem) {
@@ -92,37 +103,49 @@ void menu(int v[]){
 			insertionSort(v);
 			break;
 		default:
-			printf("\nValor invalido.\n");
+			printf("\nValor inválido.\n");
 	}
 }
 
-void relatorio(int cmp, int mov){
-	//printf("\nTempo de execucao: %lf \n", t);
-	printf("Numero de comparacoes entre elementos do vetor: %d \n", cmp);
-	printf("Numero de movimentacoes entre elementos do vetor: %d \n\n", mov);
+void relatorio(int t, int cmp, int mov){
+	printf("\tTempo de execução: %0.2lf s\n", ((double)end-start/CLOCKS_PER_SEC)/1000);
+	printf("\tNúmero de comparações: %d \n", cmp);
+	printf("\tNúmero de movimentações: %d \n\n", mov);
 }
 
 int main() {
+	setlocale(LC_ALL, "Portuguese");
 	int v[TAM], i;
-	
-	clock_t t;
-	t = clock();
 	
 	for(i = 0; i < TAM; i++)
 		v[i] = rand() % 1000;
 	
-	printf("Vetor aleatorio:\n");
+	printf("Vetor Aleatório:\n");
 	for(i = 0; i < TAM; i++)
 		printf("%d ", v[i]);
 	printf("\n");
 	
-	bubleSort(v);
-	
-	printf("Vetor ordenado:\n");
+	menu(v);
+
+	printf("\nVetor Ordenado:\n");
 	for(i = 0; i < TAM; i++)
 		printf("%d ", v[i]);
 	printf("\n");
+
+	printf("\nNúmero de Elementos Ordenados: %d\n", TAM);	
+	switch(ordem) {
+		case 1:
+			printf("\nMétodo Buble Sort\n");
+			break;
+		case 2: 
+			printf("\nMétodo Selection Sort\n");
+			break;
+		case 3:
+			printf("\nMétodo Insertion Sort\n");
+			break;
+	}
 	
-    printf("\nTempo de execucao: %lf \n", t/CLOCKS_PER_SEC);
+	relatorio(end-start, cmp, mov);
+		
 	return 0;
 }
