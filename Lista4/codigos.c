@@ -2,10 +2,10 @@
 #include <time.h>
 #include <locale.h>
 #include <stdlib.h>
-#define TAM 10000
+#define TAM 20
 
-clock_t start, end;
 int cmp, mov, ordem;
+clock_t start, end;
 
 void bubleSort(int v[]) {
 	start = clock();
@@ -16,7 +16,6 @@ void bubleSort(int v[]) {
 	
 	for(i=0; i < TAM; i++) {
 		for(j = 0; j < (TAM - 1) ; j++) {
-			
 			if(v[j] > v[j+1]) { 
 				cmp++;
 				aux = v[j];
@@ -29,7 +28,7 @@ void bubleSort(int v[]) {
 		}
 	}
 	end = clock();
-	
+
 	return;
 }
 
@@ -44,17 +43,18 @@ void selectionSort(int v[]) {
 	    max = i;
 	    for (j = i+1; j < TAM; j++) {
 	      if (v[j] < v[max]){
-	      	max = j;
 	      	cmp++;
+	      	max = j;
 		  }
 	    }
 	    if (i != max) {
-	      aux = v[i];
-	      mov++;
-	      v[i] = v[max];
-	      mov++;
-	      v[max] = aux;
-	      mov++;
+	    	cmp++;
+	      	aux = v[i];
+	      	mov++;
+	     	v[i] = v[max];
+	     	mov++;
+	     	v[max] = aux;
+	      	mov++;
 	    }
  	}
    	end = clock();
@@ -74,12 +74,13 @@ void insertionSort(int v[]) {
        	mov++;
         j = i - 1;
         while (j >= 0 && v[j] > aux) {
-        	cmp++;
+        	cmp += 2;
             v[j+1] = v[j];
-            j--; 
             mov++;
+            j--; 
         } 
         v[j+1] = aux;
+        mov++;
     } 
     end = clock();
 
@@ -106,85 +107,11 @@ void menu(int v[]) {
 		default:
 			printf("\nValor inválido.\n");
 	}
+	
+	return;
 }
 
-void relatorio(int v[], int t, int cmp, int mov) {
-	FILE *file;
-	
-	printf("\tTempo de execução: %0.2lf s\n", ((double)end-start/CLOCKS_PER_SEC)/1000);
-	printf("\tNúmero de comparações: %d \n", cmp);
-	printf("\tNúmero de movimentações: %d \n\n", mov);
-	
-	file = fopen("com112_relatorio.txt", "w");
-	fprintf(file, "Número de Elementos Ordenados: %d\n", TAM);
-	fclose(file);
-		
-	bubleSort(v);
-	file = fopen("com112_relatorio.txt", "a");
-	fprintf(file, "\nMétodo Buble Sort\n");
-	fprintf(file, "\tTempo de execução: %0.2lf s\n", ((double)end-start/CLOCKS_PER_SEC)/1000);
-	fprintf(file, "\tNúmero de comparações: %d \n", cmp);
-	fprintf(file, "\tNúmero de movimentações: %d \n\n", mov);
-	fclose(file);
-	
-	selectionSort(v);
-	file = fopen("com112_relatorio.txt", "a");
-	fprintf(file, "Método Selection Sort\n");
-	fprintf(file, "\tTempo de execução: %0.2lf s\n", ((double)end-start/CLOCKS_PER_SEC)/1000);
-	fprintf(file, "\tNúmero de comparações: %d \n", cmp);
-	fprintf(file, "\tNúmero de movimentações: %d \n\n", mov);
-	fclose(file);
-	
-	insertionSort(v);
-	file = fopen("com112_relatorio.txt", "a");
-	fprintf(file, "Método Insertion Sort\n");
-	fprintf(file, "\tTempo de execução: %0.2lf s\n", ((double)end-start/CLOCKS_PER_SEC)/1000);
-	fprintf(file, "\tNúmero de comparações: %d \n", cmp);
-	fprintf(file, "\tNúmero de movimentações: %d \n\n", mov);
-	fclose(file);
-}
-
-int main() {
-	setlocale(LC_ALL, "Portuguese");
-	FILE *file;
-	
-	int v[TAM], i;
-	
-	for(i = 0; i < TAM; i++)
-		v[i] = rand() % 1000;
-	
-	printf("Vetor Aleatório:\n");
-	for(i = 0; i < TAM; i++)
-		printf("%d ", v[i]);
-	printf("\n");
-	
-	file = fopen("com112_entrada.txt", "w");
-	fprintf(file, "%d\n", TAM);
-	fclose(file);
-	
-	for(i = 0; i < TAM; i++) {
-		file = fopen("com112_entrada.txt", "a");
-		fprintf(file, "%d ", v[i]);
-		fclose(file);
-	}
-	
-	menu(v);
-
-	printf("\nVetor Ordenado:\n");
-	for(i = 0; i < TAM; i++)
-		printf("%d ", v[i]);
-	printf("\n");
-	
-	file = fopen("com112_saida.txt", "w");
-	fprintf(file, "%d\n", TAM);
-	fclose(file);
-	
-	for(i = 0; i < TAM; i++) {
-		file = fopen("com112_saida.txt", "a");
-		fprintf(file, "%d ", v[i]);
-		fclose(file);
-	}
-	
+void relatorio() {
 	printf("\nNúmero de Elementos Ordenados: %d\n", TAM);	
 	switch(ordem) {
 		case 1:
@@ -197,8 +124,109 @@ int main() {
 			printf("\nMétodo Insertion Sort\n");
 			break;
 	}
+	printf("\tTempo de execução: %0.2lf ms\n", (((double) end - start) / CLOCKS_PER_SEC) * 1000);
+	printf("\tNúmero de comparações: %d \n", cmp);
+	printf("\tNúmero de movimentações: %d \n\n", mov);
 		
-	relatorio(v, end-start, cmp, mov);
+	return;
+}
+
+
+void gerarEntrada(int v[]) {
+	FILE *file;
+	int i;
+	
+	file = fopen("com112_entrada.txt", "a");
+	fprintf(file, "\n%d\n", TAM);
+	fclose(file);
+	
+	for(i = 0; i < TAM; i++) {
+		file = fopen("com112_entrada.txt", "a");
+		fprintf(file, "%d ", v[i]);
+		fclose(file);
+	}
+	
+	return;
+}
+
+void gerarSaida(int v[]) {
+	FILE *file;
+	int i;
+	
+	file = fopen("com112_saida.txt", "a");
+	fprintf(file, "\n%d\n", TAM);
+	fclose(file);
+	
+	for(i = 0; i < TAM; i++) {
+		file = fopen("com112_saida.txt", "a");
+		fprintf(file, "%d ", v[i]);
+		fclose(file);
+	}
+	
+	return;
+}
+
+void gerarRelatorio() {
+	FILE *file;
+	
+	file = fopen("com112_relatorio.txt", "a");
+	fprintf(file, "\nNúmero de Elementos Ordenados: %d\n", TAM);
+	fclose(file);
+	
+	switch(ordem) {
+		case 1:
+			file = fopen("com112_relatorio.txt", "a");
+			fprintf(file, "Método Buble Sort\n");
+			fclose(file);
+			break;
+		case 2: 
+			file = fopen("com112_relatorio.txt", "a");
+			fprintf(file, "Método Selection Sort\n");
+			fclose(file);
+			break;
+		case 3:
+			file = fopen("com112_relatorio.txt", "a");
+			fprintf(file, "Método Insertion Sort\n");
+			fclose(file);
+			break;
+	}
+	
+	file = fopen("com112_relatorio.txt", "a");
+	fprintf(file, "\tTempo de execução: %0.2lf ms\n", (((double) end - start) / CLOCKS_PER_SEC) * 1000);
+	fprintf(file, "\tNúmero de comparações: %d \n", cmp);
+	fprintf(file, "\tNúmero de movimentações: %d \n\n", mov);
+	fclose(file);
+	
+	return;
+}
+
+int main() {
+	setlocale(LC_ALL, "Portuguese");
+	
+	int v[TAM], i, j;
+	
+	for(i = 0; i < TAM; i++){
+		v[i] = rand() % 1000;
+	}
+	
+	printf("Vetor Aleatório:\n");
+	for(i = 0; i < TAM; i++)
+		printf("%d ", v[i]);
+	printf("\n");
+	
+	gerarEntrada(v);
+
+	menu(v);
+
+	printf("\nVetor Ordenado:\n");
+	for(i = 0; i < TAM; i++)
+		printf("%d ", v[i]);
+	printf("\n");
+
+	gerarSaida(v);
+		
+	relatorio();
+	gerarRelatorio();
 		
 	return 0;
 }
