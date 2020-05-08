@@ -2,7 +2,7 @@
 #include <time.h>
 #include <locale.h>
 #include <stdlib.h>
-#define TAM 20
+#define TAM 2000
 
 int cmp, mov, ordem;
 clock_t start, end;
@@ -112,7 +112,7 @@ void menu(int v[]) {
 }
 
 void relatorio() {
-	printf("\nNúmero de Elementos Ordenados: %d\n", TAM);	
+	printf("Número de Elementos Ordenados: %d\n", TAM);	
 	switch(ordem) {
 		case 1:
 			printf("\nMétodo Buble Sort\n");
@@ -170,7 +170,7 @@ void gerarRelatorio() {
 	FILE *file;
 	
 	file = fopen("com112_relatorio.txt", "a");
-	fprintf(file, "\nNúmero de Elementos Ordenados: %d\n", TAM);
+	fprintf(file, "Número de Elementos Ordenados: %d\n", TAM);
 	fclose(file);
 	
 	switch(ordem) {
