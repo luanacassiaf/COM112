@@ -2,7 +2,7 @@
 #include <time.h>
 #include <locale.h>
 #include <stdlib.h>
-#define TAM 2000
+#define TAM 10000
 
 int cmp, mov, ordem;
 clock_t start, end;
@@ -130,7 +130,6 @@ void relatorio() {
 		
 	return;
 }
-
 
 void gerarEntrada(int v[]) {
 	FILE *file;
