@@ -1,36 +1,18 @@
-Número de Elementos Ordenados: 2000
+Número de Elementos Ordenados: 10000
 Método Buble Sort
-	Tempo de execução: 47,00 ms
-	Número de comparações: 1003288 
-	Número de movimentações: 3009864 
+	Tempo de execução: 812,00 ms
+	Número de comparações: 24908772 
+	Número de movimentações: 74726316 
 
-Número de Elementos Ordenados: 2000
-Método Buble Sort
-	Tempo de execução: 47,00 ms
-	Número de comparações: 1003288 
-	Número de movimentações: 3009864 
-
-Número de Elementos Ordenados: 2000
-Método Buble Sort
-	Tempo de execução: 54,00 ms
-	Número de comparações: 1003288 
-	Número de movimentações: 3009864 
-
-Número de Elementos Ordenados: 2000
-Método Buble Sort
-	Tempo de execução: 47,00 ms
-	Número de comparações: 1003288 
-	Número de movimentações: 3009864 
-
-Número de Elementos Ordenados: 2000
-Método Buble Sort
-	Tempo de execução: 47,00 ms
-	Número de comparações: 1003288 
-	Número de movimentações: 3009864 
-
-Número de Elementos Ordenados: 2000
+Número de Elementos Ordenados: 10000
 Método Selection Sort
-	Tempo de execução: 15,00 ms
-	Número de comparações: 13510 
-	Número de movimentações: 5982 
+	Tempo de execução: 234,00 ms
+	Número de comparações: 72758 
+	Número de movimentações: 29943 
+
+Número de Elementos Ordenados: 10000
+Método Insertion Sort
+	Tempo de execução: 422,00 ms
+	Número de comparações: 49817544 
+	Número de movimentações: 24928770 
 

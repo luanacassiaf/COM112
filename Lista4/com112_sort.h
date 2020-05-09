@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <time.h>
+#include <locale.h>
+#include <stdlib.h>
 #define TAM 10000
 
 int cmp, mov, ordem;

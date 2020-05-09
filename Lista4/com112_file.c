@@ -1,5 +1,5 @@
-#include "com112_file.h"
 #include "com112_sort.h"
+#include "com112_file.h"
 
 void gerarEntrada(int v[]) {
 	FILE *file;

@@ -1,4 +1,5 @@
 #include "com112_sort.h"
+#include "com112_file.h"
 
 void bubleSort(int v[]) {
 	start = clock();
