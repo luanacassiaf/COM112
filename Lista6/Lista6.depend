@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1590173701 source:c:\users\lucas\documents\github\com112_2019015941\lista6\com112_file.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1590173689 source:c:\users\lucas\documents\github\com112_2019015941\lista6\com112_main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
+1590173709 source:c:\users\lucas\documents\github\com112_2019015941\lista6\com112_sort.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+
