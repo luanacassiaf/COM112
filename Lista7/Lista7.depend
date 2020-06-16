@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1592335684 source:c:\users\lucas\documents\github\com112_2019015941\lista7\main.c
+	<stdio.h>
+	"com112_arvoreAVL.h"
+
+1592334635 c:\users\lucas\documents\github\com112_2019015941\lista7\com112_arvoreavl.h
+
